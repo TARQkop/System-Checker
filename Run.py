@@ -22,7 +22,7 @@ def find_gpp(explicit_path: str | None) -> str:
 
 def build(gpp: str, output: Path) -> None:
     sources = [
-        ROOT / "System_Checker.cpp",
+        ROOT / "src" / "System_Checker.cpp",
         ROOT / "src" / "SystemCheckerApp.cpp",
         ROOT / "src" / "ConsoleRenderer.cpp",
         ROOT / "src" / "CpuMonitor.cpp",

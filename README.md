@@ -3,6 +3,15 @@
 `System Checker` is a lightweight Windows console monitor written in C++ (OOP).
 It shows live system status for CPU, RAM, Disk, and Network in a single terminal dashboard.
 
+## Highlights
+
+- Live CPU and memory usage with color-coded bars
+- CPU details (logical cores, architecture)
+- Disk monitoring with type, capacity, and usage
+- Per-adapter network status and IP addresses
+- Download/Upload rates calculated between refreshes
+- Runtime control over refresh interval
+
 ## What It Shows
 
 - CPU
@@ -31,7 +40,7 @@ It shows live system status for CPU, RAM, Disk, and Network in a single terminal
 - `+` increase refresh interval
 - `-` decrease refresh interval
 
-Default refresh interval is `60` seconds.
+Default refresh interval is `60` seconds.  
 Allowed range is `1` to `300` seconds.
 
 ## Color Rules
@@ -63,21 +72,21 @@ src/
 .vscode/tasks.json
 ```
 
-## Build Requirements
+## Requirements
 
 - Windows
 - MSYS2 UCRT64 (or compatible MinGW-w64 toolchain)
 - `g++`
 - Win32 libs:
-- `ws2_32`
-- `iphlpapi`
+  - `ws2_32`
+  - `iphlpapi`
 
 ## Build (VS Code)
 
 Use task:
 - `C/C++: g++.exe build active file`
 
-The project task already compiles all `.cpp` files and outputs:
+The task already compiles all `.cpp` files and outputs:
 - `System_Checker.exe`
 
 ## Build (Terminal)
@@ -105,7 +114,7 @@ C:\msys64\ucrt64\bin\g++.exe -fdiagnostics-color=always -g `
 
 ## Important Notes
 
-- First frame can show `Calculating...` for CPU or network rate until at least two samples exist.
+- The first frame may show `Calculating...` for CPU or network rate until at least two samples exist.
 - Network speed is derived from adapter counters over elapsed time between samples.
 - Media detection (`SSD`/`HDD`) depends on driver support; some drives return `Unknown`.
 - Network throughput currently uses `GetIfEntry` counters (`dwInOctets`, `dwOutOctets`), which are 32-bit counters; on very high traffic links, counter wrap can reduce accuracy over longer intervals.
@@ -122,4 +131,3 @@ C:\msys64\ucrt64\bin\g++.exe -fdiagnostics-color=always -g `
 - Add optional logging mode (`.csv` / `.json`).
 - Add sensor plugins (CPU/GPU/drive temperature).
 - Add unit tests for pure utility logic (formatting, bar generation, thresholds).
-
